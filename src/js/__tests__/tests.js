@@ -53,7 +53,14 @@ test('Swordsman parameters', () => {
 });
 
 test('levelUpError', () => {
-  const zombie = new Zombie('jjjj', 'Zombie', 0);
+  const zombie = new Zombie('jjjj');
+  zombie.health = 0;
+  expect(() => { zombie.levelUp(); }).toThrowError('Нельзя повысить уровень умершего персонажа.');
+});
+
+test('levelUpError', () => {
+  const zombie = new Zombie('jjjj');
+  zombie.health = -10;
   expect(() => { zombie.levelUp(); }).toThrowError('Нельзя повысить уровень умершего персонажа.');
 });
 
@@ -70,6 +77,7 @@ test('damage', () => {
 });
 
 test('damageError', () => {
-  const swordsman = new Swordsman('mm', 'Swordsman', -5);
+  const swordsman = new Swordsman('mm');
+  swordsman.health = -5;
   expect(() => { swordsman.damage(5); }).toThrowError('Ошибка!');
 });
